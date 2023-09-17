@@ -1,96 +1,113 @@
+import React, { Component } from "react";
+import { useEffect, useState } from "react";
+import * as $ from "jquery";
+import { authEndpoint, clientId, redirectUri, scopes } from "./config";
+import hash from "./hash";
+import Player from "./Player";
+import logo from "./logo.svg";
 import "./App.css";
 
-const clientId = "4e7f52bb41af4f24a16bae8895f81f56";
-const redirectUri = "http://localhost:3000/callback/";
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      token: null,
+      item: {
+        album: {
+          images: [{ url: "" }],
+        },
+        name: "",
+        artists: [{ name: "" }],
+        duration_ms: 0,
+      },
+      is_playing: "Paused",
+      progress_ms: 0,
+      no_data: false,
+    };
 
-function LogIn() {
-  let codeVerifier = generateRandomString(128);
-  generateCodeChallenge(codeVerifier).then((codeChallenge) => {
-    let state = generateRandomString(16);
-    let scope = "user-read-private user-read-email user-top-read";
-
-    localStorage.setItem("code_verifier", codeVerifier);
-
-    let args = new URLSearchParams({
-      response_type: "code",
-      client_id: clientId,
-      scope: scope,
-      redirect_uri: redirectUri,
-      state: state,
-      code_challenge_method: "S256",
-      code_challenge: codeChallenge,
-    });
-
-    window.location = "https://accounts.spotify.com/authorize?" + args;
-  });
-
-  function generateRandomString(length) {
-    let text = "";
-    let possible =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for (let i = 0; i < length; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
+    this.getTopItems = this.getTopItems.bind(this);
+    this.tick = this.tick.bind(this);
   }
 
-  async function generateCodeChallenge(codeVerifier) {
-    function base64encode(string) {
-      return btoa(String.fromCharCode.apply(null, new Uint8Array(string)))
-        .replace(/\+/g, "-")
-        .replace(/\//g, "_")
-        .replace(/=+$/, "");
+  componentDidMount() {
+    // Set token
+    let _token = hash.access_token;
+
+    if (_token) {
+      // Set token
+      this.setState({
+        token: _token,
+      });
+      this.getTopItems(_token);
     }
 
-    const encoder = new TextEncoder();
-    const data = encoder.encode(codeVerifier);
-    const digest = await window.crypto.subtle.digest("SHA-256", data);
-
-    return base64encode(digest);
+    // set interval for polling every 5 seconds
+    this.interval = setInterval(() => this.tick(), 5000);
   }
 
-  const urlParams = new URLSearchParams(window.location.search);
-  let code = urlParams.get("code");
+  componentWillUnmount() {
+    // clear the interval to save resources
+    clearInterval(this.interval);
+  }
 
-  // let codeVerifier = localStorage.getItem("code_verifier");
+  tick() {
+    if (this.state.token) {
+      this.getTopItems(this.state.token);
+    }
+  }
 
-  let body = new URLSearchParams({
-    grant_type: "authorization_code",
-    code: code,
-    redirect_uri: redirectUri,
-    client_id: clientId,
-    code_verifier: codeVerifier,
-  });
+  getTopItems(token) {
+    // Make a call using the token
+    $.ajax({
+      url: "https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=50",
+      type: "GET",
+      beforeSend: (xhr) => {
+        xhr.setRequestHeader("Authorization", "Bearer " + token);
+      },
+      success: (data) => {
+        // Checks if the data is not empty
+        console.log(data);
+        if (!data) {
+          this.setState({
+            no_data: true,
+          });
+          return;
+        }
 
-  const response = fetch("https://accounts.spotify.com/api/token", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: body,
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("HTTP status " + response.status);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      localStorage.setItem("access_token", data.access_token);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
+        this.setState({
+          token: token,
+        });
+      },
     });
-}
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Genre Galaxy</h1>
-      <button onClick={LogIn}>Log In</button>
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          {!this.state.token && (
+            <a
+              className="btn btn--loginApp-link"
+              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+                "%20"
+              )}&response_type=token&show_dialog=true`}
+            >
+              Login to Spotify
+            </a>
+          )}
+          {this.state.token && !this.state.no_data && (
+            <Player token={this.state.token} />
+          )}
+          {/* {this.state.no_data && (
+            <p>
+              You need to be playing a song on Spotify, for something to appear here.
+            </p>
+          )} */}
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
