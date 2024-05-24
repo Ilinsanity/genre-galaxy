@@ -13,9 +13,9 @@ class App extends Component {
     this.state = {
       token: null,
       item: {
-        album: {
-          images: [{ url: "" }],
-        },
+        // album: {
+        //   images: [{ url: "" }],
+        // },
         name: "",
         artists: [{ name: "" }],
         duration_ms: 0,
@@ -25,7 +25,7 @@ class App extends Component {
       no_data: false,
     };
 
-    this.getTopItems = this.getTopItems.bind(this);
+    // this.getTopItems = this.getTopItems.bind(this);
     this.tick = this.tick.bind(this);
   }
 
@@ -38,7 +38,9 @@ class App extends Component {
       this.setState({
         token: _token,
       });
-      this.getTopItems(_token);
+
+      console.log(this.state.token);
+      // this.getTopItems(_token);
     }
 
     // set interval for polling every 5 seconds
@@ -52,7 +54,7 @@ class App extends Component {
 
   tick() {
     if (this.state.token) {
-      this.getTopItems(this.state.token);
+      // this.getTopItems(this.state.token);
     }
   }
 

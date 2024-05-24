@@ -13,16 +13,16 @@ const Player = (props) => {
     getGenres();
   }, []);
   let longgenrearray = [];
-  const getTopArtists = async (timerange) => {
-    return fetch(
-      TOP_ARTISTS_ENDPOINT + `time_range=${timerange}` + "&limit=10",
-      {
-        headers: {
-          Authorization: `Bearer ${props.token}`,
-        },
-      }
-    );
-  };
+  // const getTopArtists = async (timerange) => {
+  //   return fetch(
+  //     TOP_ARTISTS_ENDPOINT + `time_range=${timerange}` + "&limit=10",
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${props.token}`,
+  //       },
+  //     }
+  //   );
+  // };
 
   const getTopTracks = async (timerange) => {
     return fetch(
