@@ -4,7 +4,7 @@ import * as $ from "jquery";
 import { authEndpoint, clientId, redirectUri, scopes } from "./config";
 import hash from "./hash";
 import Player from "./Player";
-import logo from "./logo.svg";
+
 import "./App.css";
 
 class App extends Component {
@@ -87,10 +87,9 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           {!this.state.token && (
             <a
-              className="btn btn--loginApp-link"
+              className="btn"
               href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
                 "%20"
               )}&response_type=token&show_dialog=true`}
@@ -101,11 +100,6 @@ class App extends Component {
           {this.state.token && !this.state.no_data && (
             <Player token={this.state.token} />
           )}
-          {/* {this.state.no_data && (
-            <p>
-              You need to be playing a song on Spotify, for something to appear here.
-            </p>
-          )} */}
         </header>
       </div>
     );

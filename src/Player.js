@@ -55,8 +55,14 @@ const Player = (props) => {
       }
     }
 
+    // Convert the frequency map to an array of objects
+    const frequencyArray = Object.keys(frequencyMap).map((genre) => ({
+      genre: genre,
+      count: frequencyMap[genre],
+    }));
+
     // Sort the array based on element frequency
-    const sortedArray = arr.sort((a, b) => frequencyMap[b] - frequencyMap[a]);
+    const sortedArray = frequencyArray.sort((a, b) => b.count - a.count);
 
     return sortedArray;
   }
@@ -67,7 +73,7 @@ const Player = (props) => {
     const array = [];
     ke1.then(function (result) {
       const data = result;
-      console.log(data);
+      // console.log(data);
 
       for (let i = 1; i <= 50; i++) {
         array.push(data.items[i - 1].album.artists[0].id);
@@ -79,7 +85,7 @@ const Player = (props) => {
 
       art.then(function (result) {
         const data = result;
-        console.log(data);
+        // console.log(data);
         genrearray.push(data.genres);
       });
     }
@@ -96,9 +102,25 @@ const Player = (props) => {
   //   }
   // }
 
-  console.log(longgenrearray);
+  // console.log(longgenrearray);
 
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <div className="system">
+        <div className="semi-circle"></div>
+        <div className="song-planet"></div>
+        <div className="song-planet"></div>
+        <div className="song-planet"></div>
+        <div className="song-planet"></div>
+        <div className="song-planet"></div>
+        <div className="song-planet"></div>
+        <div className="song-planet"></div>
+        <div className="song-planet"></div>
+        <div className="song-planet"></div>
+        <div className="song-planet"></div>
+      </div>
+    </div>
+  );
 };
 
 export default Player;
