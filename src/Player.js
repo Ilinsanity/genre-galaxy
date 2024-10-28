@@ -108,16 +108,46 @@ const Player = (props) => {
     <div className="App">
       <div className="system">
         <div className="semi-circle"></div>
-        <div className="song-planet"></div>
-        <div className="song-planet"></div>
-        <div className="song-planet"></div>
-        <div className="song-planet"></div>
-        <div className="song-planet"></div>
-        <div className="song-planet"></div>
-        <div className="song-planet"></div>
-        <div className="song-planet"></div>
-        <div className="song-planet"></div>
-        <div className="song-planet"></div>
+        <div className="song-planet">
+          <p className="artistorb">NewJeans</p>
+          <p className="songorb">Supernatural</p>
+        </div>
+        <div className="song-planet">
+          <p className="artistorb">NewJeans</p>
+          <p className="songorb">Supernatural</p>
+        </div>
+        <div className="song-planet">
+          <p className="artistorb">NewJeans</p>
+          <p className="songorb">Supernatural</p>
+        </div>
+        <div className="song-planet">
+          <p className="artistorb">NewJeans</p>
+          <p className="songorb">Supernatural</p>
+        </div>
+        <div className="song-planet">
+          <p className="artistorb">NewJeans</p>
+          <p className="songorb">Supernatural</p>
+        </div>
+        <div className="song-planet">
+          <p className="artistorb">NewJeans</p>
+          <p className="songorb">Supernatural</p>
+        </div>
+        <div className="song-planet">
+          <p className="artistorb">NewJeans</p>
+          <p className="songorb">Supernatural</p>
+        </div>
+        <div className="song-planet">
+          <p className="artistorb">NewJeans</p>
+          <p className="songorb">Supernatural</p>
+        </div>
+        <div className="song-planet">
+          <p className="artistorb">NewJeans</p>
+          <p className="songorb">Supernatural</p>
+        </div>
+        <div className="song-planet">
+          <p className="artistorb">NewJeans</p>
+          <p className="songorb">Supernatural</p>
+        </div>
       </div>
     </div>
   );

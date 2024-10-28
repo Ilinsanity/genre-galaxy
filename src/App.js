@@ -86,21 +86,23 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          {!this.state.token && (
-            <a
-              className="btn"
-              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-                "%20"
-              )}&response_type=token&show_dialog=true`}
-            >
-              Login to Spotify
-            </a>
-          )}
-          {this.state.token && !this.state.no_data && (
-            <Player token={this.state.token} />
-          )}
-        </header>
+        {!this.state.token && (
+          <header className="App-header">
+            {!this.state.token && (
+              <a
+                className="btn"
+                href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+                  "%20"
+                )}&response_type=token&show_dialog=true`}
+              >
+                Login to Spotify
+              </a>
+            )}
+          </header>
+        )}
+        {this.state.token && !this.state.no_data && (
+          <Player token={this.state.token} />
+        )}
       </div>
     );
   }
