@@ -87,10 +87,10 @@ class App extends Component {
     return (
       <div className="App">
         {!this.state.token && (
-          <header className="App-header">
+          <div className="beginningdiv">
             {!this.state.token && (
               <a
-                className="btn"
+                className="btn-start"
                 href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
                   "%20"
                 )}&response_type=token&show_dialog=true`}
@@ -98,7 +98,7 @@ class App extends Component {
                 Login to Spotify
               </a>
             )}
-          </header>
+          </div>
         )}
         {this.state.token && !this.state.no_data && (
           <Player token={this.state.token} />

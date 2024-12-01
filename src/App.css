@@ -1,138 +1,316 @@
 @import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap");
 
-.App {
-  text-align: center;
+@font-face {
+  font-family: "Gotham";
+  src: url(../src/fonts/Gotham-Black.otf);
 }
 
-.App-header {
-  background-color: #282c34;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/*Limegreen: var(--primarycolour) */
+/*Electric Blue: var(--secondarycolour) */
+
+:root {
+  --primarycolour: #ccf381;
+
+  --secondarycolour: #4831d4;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html,
 body {
   height: 100%;
+  background-color: var(--primarycolour);
+}
+.BCont {
+  background-color: var(--primarycolour);
+  height: 100vh;
+  width: 100%;
+  position: relative;
 }
 
-body {
-  background-color: #333;
-  color: #eee;
-  font-family: Helvetica, Arial;
-  /* font-size: 3vmin; */
+.colourchange {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  margin-right: 10px;
+  margin-bottom: 10px;
+
+  font-family: "Gotham", sans-serif;
+  font-size: 1rem;
+  color: var(--secondarycolour);
+  background-color: transparent;
+  border: solid 3px var(--secondarycolour);
+  -webkit-transition: background-color 0.6s;
+  transition: background-color 0.6s;
+  border-radius: 7px !important;
 }
 
-.hidden {
-  display: none;
+.colourchange:hover {
+  color: var(--primarycolour);
+  background-color: var(--secondarycolour);
+}
+
+.fontawepalette {
+  font-size: 2rem;
+}
+.buttoncont1 {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.buttoncont2 {
+  display: flex;
+  justify-content: center;
+}
+
+.TimeButton {
+  font-family: "Gotham", sans-serif;
+  font-size: 1rem;
+  color: var(--secondarycolour);
+  background-color: transparent;
+  border: solid 1px var(--secondarycolour);
+  -webkit-transition: background-color 0.6s;
+  transition: background-color 0.6s;
+  border-radius: 7px !important;
+  /* margin-right: 2% !important; */
+}
+
+.TimeButton:hover {
+  color: var(--primarycolour);
+  background-color: var(--secondarycolour);
+}
+
+.selectedButton {
+  /* margin-right: 2% !important; */
+  border-radius: 7px !important;
+  font-family: "Gotham", sans-serif;
+  font-size: 1em;
+  color: var(--primarycolour) !important;
+  background-color: var(--secondarycolour) !important;
+}
+/* .playbuttoncont {
+  width: 2.5rem;
+
+  border-radius: 20%;
+  text-align: center;
+  -webkit-transition: background-color 0.6s;
+  transition: background-color 0.6s;
+} */
+
+/* .playbutton:hover {
+  background-color: var(--secondarycolour);
+  color: var(--primarycolour);
+} */
+
+.playbutton {
+  font-family: "Gotham", sans-serif;
+  color: var(--secondarycolour);
+  font-size: 2.2rem;
+  /* padding: 5px; */
+  border-radius: 20%;
+  -webkit-transition: color 0.6s;
+  transition: color 0.6s;
+  -webkit-transition: background-color 0.6s;
+  transition: background-color 0.6s;
+}
+
+.cont {
+  border: var(--secondarycolour) 1px solid;
+}
+
+.container {
+}
+
+.row {
+  padding: 2%;
+}
+
+.entrycontainer {
+  /* margin-top: 2% !important; */
+  /* border: 7px var(--secondarycolour);
+  border-style: double;
+  border-radius: 7px; */
+  max-width: 55%;
+}
+
+.leftside {
+}
+
+.EntryImg {
+  height: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  border: 4px var(--secondarycolour) solid;
+  /* border-radius: 40px; */
+  animation: mymove 5s ease-in-out infinite;
+}
+
+.recentImg {
+  height: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  border: 4px var(--secondarycolour) solid;
+  /* border-radius: 40px; */
+  /* animation: mymove 4s infinite; */
+  float: right;
+}
+
+.recentcontainer {
+  max-width: 30%;
+}
+
+.recentlongago {
+  font-family: "Gotham", sans-serif;
+  color: var(--secondarycolour);
+  font-size: 1rem;
+}
+
+@keyframes mymove {
+  50% {
+    border-radius: 50px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .EntryImg {
+    max-width: 60%;
+  }
+}
+
+.SongName {
+  font-family: "Gotham", sans-serif;
+  color: var(--secondarycolour);
+  font-size: 5rem;
+  /* float:right; */
+}
+.Artist {
+  font-family: "Gotham", sans-serif;
+  color: var(--secondarycolour);
+  font-size: 1rem;
+  /* float: right; */
+}
+
+.Artisttext {
+  font-family: "Gotham", sans-serif;
+  color: var(--secondarycolour);
+  font-size: 3rem;
+  /* float: right; */
+}
+
+.rankcont {
+  text-align: right;
+}
+
+@media only screen and (max-width: 576px) {
+  .rankcont {
+    text-align: left;
+  }
+}
+.songartistcont {
+  text-align: left;
+}
+
+.entryText {
+  color: var(--secondarycolour);
+  font-size: 20px;
+  /* float: right; */
+}
+
+.rank {
+  font-family: "Gotham", sans-serif;
+  color: var(--secondarycolour);
+  font-size: 6rem;
+}
+
+.nowplayingcont {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  background-color: var(--primarycolour);
+  background-size: cover;
+}
+
+.nowplayingrow {
+  /* height: 40%;
+  width: 75%; */
+  margin: auto;
+  background-color: var(--secondarycolour);
+  /* -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px); */
+  padding: 20px;
+  border-radius: 30px;
+  /* margin: 30px; */
+}
+
+.nowplayingbutton {
+  font-family: "Gotham", sans-serif;
+  font-size: 1rem;
+  color: var(--secondarycolour);
+  background-color: transparent;
+  border: solid 1px var(--secondarycolour);
+  /* -webkit-transition: background-color 0.1s;
+  transition: background-color 0.1s; */
+}
+
+.nowplayingbutton:hover {
+  color: var(--primarycolour);
+  background-color: var(--secondarycolour);
+}
+
+.NowplayingImg {
+  max-width: 100%;
+  border-radius: 100%;
+  animation: rotate 6s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.notblurred {
+}
+.nowplayingtextcont {
+}
+.NowplayingSong {
+  font-family: "Gotham", sans-serif;
+  color: var(--primarycolour);
+  font-size: 3rem;
+}
+.NowplayingArtist {
+  font-family: "Gotham", sans-serif;
+  color: var(--primarycolour);
+  font-size: 1rem;
+  letter-spacing: 2px;
 }
 
 /** Buttons **/
 
-.btn {
+.btn-start {
   background-color: transparent;
   border-radius: 2em;
-  border: 0.2em solid #1ecd97;
-  color: #1ecd97;
+  border: 0.2em solid var(--secondarycolour);
+  color: var(--secondarycolour);
   cursor: pointer;
   font-size: 3vmin;
   padding: 0.7em 1.5em;
   font-family: "Lexend Deca", sans-serif;
   font-weight: 800;
-  transition: all 0.25s ease;
+  transition: all 0.5s ease;
 }
 
-.btn:hover {
-  background: #1ecd97;
-  color: #333;
+.btn-start:hover {
+  background: var(--secondarycolour);
+  color: var(--primarycolour);
 }
 
-.semi-circle {
-  width: 350px; /* Width of the semi-circle */
-  height: 700px; /* Double the width for a proper semi-circle */
-  background-color: #ffcc33; /* Color of the semi-circle */
-  /* position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%); */
-  border-top-right-radius: 350px;
-  border-bottom-right-radius: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.song-planet {
-  width: 300px;
-  height: 300px;
-  background-color: rgb(140, 0, 255);
-  border-radius: 100%;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 150px;
-}
-
-.system {
-  display: flex;
-  justify-content: space-around; /* Distribute items with space between them */
-  align-items: center; /* Align items vertically in the center */
-  height: 100vh; /* Optional: makes items vertically centered on the page */
-  width: max-content;
-  background-color: #1c253c;
-}
-
-.artistorb {
-  /* height: 150px;
-  width: 150px; */
-  animation: orbit 7s linear infinite;
-  border-radius: 100%;
-  /* background-color: #eee; */
-  color: white;
+.beginningdiv {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Lexend Deca", sans-serif;
-  font-size: 25px;
-  font-weight: 600;
-  position: absolute;
-}
-.songorb {
-  /* height: 150px;
-  width: 150px; */
-  animation: orbit 7s linear infinite;
-  animation-delay: 3.5s;
-  border-radius: 100%;
-  /* background-color: #eee; */
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Lexend Deca", sans-serif;
-  font-size: 25px;
-  font-weight: 600;
-  position: absolute;
-}
-@keyframes orbit {
-  0% {
-    transform: rotate(0deg) translateX(250px) rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg) translateX(250px) rotate(-360deg);
-  }
+  height: 100vh; /* Full viewport height */
 }
